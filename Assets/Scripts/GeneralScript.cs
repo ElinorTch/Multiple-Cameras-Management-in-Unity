@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using Unity.AI.Navigation;
 
 public class GeneralScript : MonoBehaviour
 {
@@ -29,9 +30,9 @@ public class GeneralScript : MonoBehaviour
             }
         }
 
-        followedCam.enabled = true;
-        onTopCam.enabled = false;
-        currentCam = followedCam;
+        followedCam.enabled = false;
+        onTopCam.enabled = true;
+        currentCam = onTopCam;
     }
 
     // Update is called once per frame

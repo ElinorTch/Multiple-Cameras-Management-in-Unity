@@ -1,3 +1,4 @@
+using Unity.AI.Navigation;
 using UnityEngine;
 
 public class ControleBille : MonoBehaviour
@@ -37,11 +38,16 @@ public class ControleBille : MonoBehaviour
             { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
         };
 
-        for (int col = 0; col < 20; col++) 
-            for (int lig = 0; lig < 20; lig++) 
-                if (map[lig, col] == 1) 
-                    Instantiate(internWall, new Vector3(col * 2 - 19, 0.5f, 19 - lig * 2), Quaternion.identity);
+        GameObject gM;
+        for (int col = 0; col < 20; col++)
+            for (int lig = 0; lig < 20; lig++)
+                if (map[lig, col] == 1)
+                {
 
+                    gM = Instantiate(internWall, new Vector3(col * 2 - 19, 0.5f, 19 - lig * 2), Quaternion.identity);
+                    gM.GetComponent<NavMeshSurface>().BuildNavMesh();
+                }
+        GameObject.Find("Soil").GetComponent<NavMeshSurface>().BuildNavMesh();
         rb = this.GetComponent<Rigidbody>();
     }
 
