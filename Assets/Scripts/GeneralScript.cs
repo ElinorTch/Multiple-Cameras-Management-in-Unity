@@ -1,14 +1,19 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class GeneralScript : MonoBehaviour
 {
-
+    private GameObject bille;
     Camera followedCam, onTopCam, currentCam;
+    private NavMeshAgent garde;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     [System.Obsolete]
     void Start()
     {
+        bille = GameObject.Find("Bille");
+        garde = GameObject.Find("Garde").GetComponent<NavMeshAgent>();
+
         Camera[] cameras = FindObjectsOfType<Camera>();
         foreach (Camera cam in cameras)
         {
@@ -32,6 +37,8 @@ public class GeneralScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        garde.destination = bille.transform.position;
+
         if (Input.GetKeyDown(KeyCode.C))
         {
             if (currentCam == followedCam)
