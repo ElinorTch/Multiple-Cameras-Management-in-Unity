@@ -35,10 +35,34 @@ public class GeneralScript : MonoBehaviour
         currentCam = onTopCam;
     }
 
+    void traiterClic(Vector3 mousePos)
+    {
+        Ray ray = currentCam.ScreenPointToRay(mousePos);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit))
+        {
+            Transform objectHit = hit.transform;
+
+            Debug.Log(objectHit.gameObject.name + " en "
+                + hit.point.x + " "
+                + hit.point.y + " "
+                + hit.point.z);
+
+            if ( objectHit.gameObject.name == "Soil") garde.SetDestination(hit.point);
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
-        garde.destination = bille.transform.position;
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            traiterClic(Input.mousePosition);
+        }
+
+        //garde.destination = bille.transform.position;
 
         if (Input.GetKeyDown(KeyCode.C))
         {
